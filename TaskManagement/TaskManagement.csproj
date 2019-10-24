@@ -67,6 +67,10 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="DemoApp\DemoApp1\DemoApp1.exe.config" />
+    <None Include="DemoApp\DemoApp2\DemoApp2.exe.config" />
+    <None Include="DemoApp\DemoApp3\DemoApp3.exe.config" />
+    <None Include="DemoApp\DemoApp4\DemoApp4.exe.config" />
     <None Include="Properties\DataSources\Form1.datasource" />
     <None Include="Properties\DataSources\Program.datasource" />
     <None Include="Properties\Settings.settings">
@@ -84,6 +88,16 @@
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DemoApp\DemoApp1\DemoApp1.exe" />
+    <Content Include="DemoApp\DemoApp1\DemoApp1.pdb" />
+    <Content Include="DemoApp\DemoApp2\DemoApp2.exe" />
+    <Content Include="DemoApp\DemoApp2\DemoApp2.pdb" />
+    <Content Include="DemoApp\DemoApp3\DemoApp3.exe" />
+    <Content Include="DemoApp\DemoApp3\DemoApp3.pdb" />
+    <Content Include="DemoApp\DemoApp4\DemoApp4.exe" />
+    <Content Include="DemoApp\DemoApp4\DemoApp4.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
