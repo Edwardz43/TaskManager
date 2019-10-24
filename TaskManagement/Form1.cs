@@ -26,68 +26,84 @@ namespace TaskManagement
 
         private void GetProccessList()
         {
-            objects.Clear();          
-            foreach (string s in AppArray)
-            {               
+            objects.Clear();
+            for (int i = 0; i < AppArray.Length; i++)
+            {
                 StringBuilder sb = new StringBuilder();
                 string root = ConfigurationManager.AppSettings["AppPath"].ToString();
                 string path =
                     sb.Append(root) // 記得修改路徑
-                    .Append(s)
+                    .Append(AppArray[i])
                     .Append("\\")
-                    .Append(s)
+                    .Append(AppArray[i])
                     .Append(".exe").ToString();
                 ProcessInfo process = new ProcessInfo
                 {
-                    Name = s,
-                    ID = 0,                    
+                    Name = AppArray[i],
+                    ID = 0,
                     Path = path
-                };                
+                };
                 objects.Add(process);
                 string data = string.Format("name:{0}, ID:{1}, Path:{2}", process.Name, process.ID, process.Path);
                 Console.WriteLine(data);
-                
-                comboBox1.ValueMember = null;
-                comboBox1.DisplayMember = "Name";
-                comboBox1.DataSource = objects;
-            }                
-            //comboBox1.BeginUpdate();            
+
+                listBox2.ValueMember = null;
+                listBox2.DisplayMember = "Name";
+                listBox2.Items.Add(process);
+                /*listBox1.ValueMember = null;
+                listBox1.DisplayMember = "Name";
+                listBox1.DataSource = objects;*/
+            }
+            
+            //listBox1.BeginUpdate();            
         }
 
         private void TerminateProcess(object sender, EventArgs e)
         {
-            ProcessInfo info = (ProcessInfo)comboBox1.SelectedValue;
+            ProcessInfo info = (ProcessInfo)listBox1.SelectedItem;
             if (info != null)
             {
                 try
                 {
                     Process p = Process.GetProcessById(info.ID);                    
                     info.ID = 0;
-                    p.Kill();                    
+                    p.Kill();
+                    MessageBox.Show(info.ID.ToString());
+                    listBox1.Items.Remove(info);
+                    info.ID = 0;
+                    listBox2.ValueMember = null;
+                    listBox2.DisplayMember = "Name";
+                    listBox2.Items.Add(info);                   
                 }
                 catch
                 {                    
                     MessageBox.Show("程序已終止");
                 }                               
             }
+
         }
 
-        private void comboBox1_SelectedValueChanged(object sender, EventArgs e)
+        /*private void listBox1_SelectedValueChanged(object sender, EventArgs e)
         {
-            if (comboBox1.SelectedValue != null)
+            if (listBox1.SelectedValue != null)
             {
-                ProcessInfo current = (ProcessInfo)comboBox1.SelectedValue;
+                ProcessInfo current = (ProcessInfo)listBox1.SelectedValue;
                 //MessageBox.Show(current.ID + ":" + current.Name);
             }
-        }
+        }*/
 
         private void InvokeBtn(object sender, EventArgs e)
         {            
-            ProcessInfo process = ((ProcessInfo)comboBox1.SelectedValue);
-            if (process.ID == 0)
+            ProcessInfo process = ((ProcessInfo)listBox2.SelectedItem);
+            if (process != null)
             {
                 Process p = Process.Start(process.Path);                
-                process.ID = p.Id;
+                process.ID = p.Id;               
+                listBox2.Items.Remove(process);
+                listBox1.ValueMember = null;
+                listBox1.DisplayMember = "Name";
+                process.ID = 1;
+                listBox1.Items.Add(process);               
             }
             else
             {
@@ -111,5 +127,6 @@ namespace TaskManagement
         {
 
         }
+
     }
 }
