@@ -14,14 +14,15 @@ namespace TaskManagement
 
         private Dictionary<int, bool> ProcessMap;
 
-        private string[] AppArray = { "DemoApp1", "DemoApp2" , "DemoApp3" , "DemoApp4" };
+        private string[] AppArray;
 
         public Form1()
         {
             InitializeComponent();
             objects = new BindingList<ProcessInfo>();
             ProcessMap = new Dictionary<int, bool>();
-            GetProccessList();
+            AppArray = ConfigurationManager.AppSettings["AppList"].Split(',');
+            GetProccessList();            
         }
 
         private void GetProccessList()
@@ -124,6 +125,19 @@ namespace TaskManagement
         }
 
         private void TerminateAll(object sender, EventArgs e)
+        {
+            foreach (ProcessInfo process in objects)
+            {
+                if (process.ID != 0)
+                {
+                    Process p = Process.GetProcessById(process.ID);
+                    p.Kill();
+                    process.ID = 0;
+                }
+            }
+        }
+
+        private void label1_Click(object sender, EventArgs e)
         {
 
         }
