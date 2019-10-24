@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Diagnostics;
 using System.Text;
 using System.Windows.Forms;
@@ -29,8 +30,9 @@ namespace TaskManagement
             foreach (string s in AppArray)
             {               
                 StringBuilder sb = new StringBuilder();
+                string root = ConfigurationManager.AppSettings["AppPath"].ToString();
                 string path =
-                    sb.Append(@"C:\Users\edlo\source\repos\TaskManagement\TaskManagement\DemoApp\") // 記得修改路徑
+                    sb.Append(root) // 記得修改路徑
                     .Append(s)
                     .Append("\\")
                     .Append(s)
