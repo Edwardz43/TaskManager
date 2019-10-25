@@ -3,13 +3,25 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using static TaskManagement.ShowWindowCommand;
 
 namespace TaskManagement
 {
     public partial class Form1 : Form
-    {        
+    {
+        #region ConsoleWindow 相關
+        [DllImport("USER32.DLL")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("USER32.DLL")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool ShowWindow(IntPtr hWnd, ShowWindowCommands nCmdShow);
+        
+        #endregion
+
         public BindingList<ProcessInfo> objects;
 
         private Dictionary<int, bool> ProcessMap;
@@ -22,10 +34,13 @@ namespace TaskManagement
             objects = new BindingList<ProcessInfo>();
             ProcessMap = new Dictionary<int, bool>();
             AppArray = ConfigurationManager.AppSettings["AppList"].Split(',');
-            GetProccessList();            
+            GetAppList();
         }
 
-        private void GetProccessList()
+        /// <summary>
+        /// 讀取 App 列表
+        /// </summary>
+        private void GetAppList()
         {
             objects.Clear();
             for (int i = 0; i < AppArray.Length; i++)
@@ -58,6 +73,11 @@ namespace TaskManagement
             //listBox1.BeginUpdate();            
         }
 
+        /// <summary>
+        /// 關閉程序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TerminateProcess(object sender, EventArgs e)
         {
             ProcessInfo info = (ProcessInfo)listBox1.SelectedItem;
@@ -65,32 +85,28 @@ namespace TaskManagement
             {
                 try
                 {
-                    MessageBox.Show(info.ID.ToString());
+                    //MessageBox.Show(info.ID.ToString());
                     Process p = Process.GetProcessById(info.ID);                                        
-                    p.Kill();                    
-                    listBox1.Items.Remove(info);
-                    info.ID = 0;
-                    listBox2.ValueMember = null;
-                    listBox2.DisplayMember = "Name";
-                    listBox2.Items.Add(info);                   
+                    p.Kill();                                      
                 }
                 catch
                 {                    
                     MessageBox.Show("程序已終止");
-                }                               
+                }
+                listBox1.Items.Remove(info);
+                info.ID = 0;
+                listBox2.ValueMember = null;
+                listBox2.DisplayMember = "Name";
+                listBox2.Items.Add(info);
             }
 
         }
 
-        /*private void listBox1_SelectedValueChanged(object sender, EventArgs e)
-        {
-            if (listBox1.SelectedValue != null)
-            {
-                ProcessInfo current = (ProcessInfo)listBox1.SelectedValue;
-                //MessageBox.Show(current.ID + ":" + current.Name);
-            }
-        }*/
-
+        /// <summary>
+        /// 開啟程序
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InvokeBtn(object sender, EventArgs e)
         {            
             ProcessInfo process = ((ProcessInfo)listBox2.SelectedItem);
@@ -110,6 +126,11 @@ namespace TaskManagement
             }
         }
 
+        /// <summary>
+        /// 全部開啟
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void InvokeAll(object sender, EventArgs e)
         {
             foreach (ProcessInfo process in objects)
@@ -126,14 +147,27 @@ namespace TaskManagement
             }
         }
 
+        /// <summary>
+        /// 全部關閉
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TerminateAll(object sender, EventArgs e)
         {
             foreach (ProcessInfo process in objects)
             {
                 if (process.ID != 0)
                 {
-                    Process p = Process.GetProcessById(process.ID);
-                    p.Kill();
+                    Process p;
+                    try
+                    {
+                        p = Process.GetProcessById(process.ID);
+                        p.Kill();
+                    }
+                    catch
+                    {
+                        //
+                    }                                       
                     process.ID = 0;
                     listBox1.Items.Remove(process);                  
                     listBox2.ValueMember = null;
@@ -141,12 +175,38 @@ namespace TaskManagement
                     listBox2.Items.Add(process);
                 }
             }
-        }
-
-        private void label1_Click(object sender, EventArgs e)
+        }       
+        
+        /// <summary>
+        /// Focus選定的 console window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SetConsoleForeground(object sender, EventArgs e)
         {
+            ListBox box = (ListBox)sender;
+            ProcessInfo processInfo = (ProcessInfo)box.SelectedItem;
+            Console.WriteLine(processInfo.ID + ", " + processInfo.Name);
+            //MessageBox.Show(processInfo.ID + ", " + processInfo.Name);
 
-        }
-
+            try
+            {
+                Process process = Process.GetProcessById(processInfo.ID);
+                if (process != null)
+                {
+                    //process.WaitForInputIdle();
+                    IntPtr s = process.MainWindowHandle;                    
+                    ShowWindow(s, ShowWindowCommands.Normal);
+                    SetForegroundWindow(s);                    
+                    //Console.Write("Proccess found: " + process.ToString());
+                }
+                //listProcess();
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("ERROR: Application is not running!\nException: " + exc.Message);                
+                return;
+            }
+        }        
     }
 }
