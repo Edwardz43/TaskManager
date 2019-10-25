@@ -40,11 +40,13 @@ namespace TaskManagement
             this.CloseLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.TitalbarLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.panel1 = new System.Windows.Forms.Panel();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // button2
@@ -131,7 +133,6 @@ namespace TaskManagement
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(268, 357);
             this.listBox2.TabIndex = 9;
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // CloseLabel
             // 
@@ -139,7 +140,7 @@ namespace TaskManagement
             this.CloseLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseLabel.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CloseLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.CloseLabel.Location = new System.Drawing.Point(875, 0);
+            this.CloseLabel.Location = new System.Drawing.Point(882, 0);
             this.CloseLabel.Name = "CloseLabel";
             this.CloseLabel.Size = new System.Drawing.Size(39, 32);
             this.CloseLabel.TabIndex = 12;
@@ -171,16 +172,19 @@ namespace TaskManagement
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Closed:";
             // 
-            // label1
+            // TitalbarLabel
             // 
-            this.label1.Font = new System.Drawing.Font("Cascadia Code", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(203)))), ((int)(((byte)(158)))));
-            this.label1.Location = new System.Drawing.Point(1, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(868, 32);
-            this.label1.TabIndex = 15;
-            this.label1.Text = "label1";
-            this.label1.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TitalbarLabel.Font = new System.Drawing.Font("Cascadia Code", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitalbarLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(203)))), ((int)(((byte)(158)))));
+            this.TitalbarLabel.Location = new System.Drawing.Point(-5, 0);
+            this.TitalbarLabel.Name = "TitalbarLabel";
+            this.TitalbarLabel.Size = new System.Drawing.Size(881, 32);
+            this.TitalbarLabel.TabIndex = 15;
+            this.TitalbarLabel.Text = "label1";
+            this.TitalbarLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.TitalbarLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitalbarLabel_MouseDown);
+            this.TitalbarLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TitalbarLabel_MouseMove);
+            this.TitalbarLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TitalbarLabel_MouseUp);
             // 
             // pictureBox1
             // 
@@ -192,17 +196,26 @@ namespace TaskManagement
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
+            // panel1
+            // 
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(32)))), ((int)(((byte)(52)))));
+            this.panel1.Controls.Add(this.TitalbarLabel);
+            this.panel1.Controls.Add(this.CloseLabel);
+            this.panel1.Location = new System.Drawing.Point(-4, -1);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(924, 36);
+            this.panel1.TabIndex = 17;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
             this.ClientSize = new System.Drawing.Size(915, 480);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.pictureBox1);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.CloseLabel);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.button3);
@@ -213,6 +226,7 @@ namespace TaskManagement
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -226,8 +240,9 @@ namespace TaskManagement
         private System.Windows.Forms.Label CloseLabel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label TitalbarLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Panel panel1;
     }
 }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -27,6 +28,8 @@ namespace TaskManagement
         private Dictionary<int, bool> ProcessMap;
 
         private string[] AppArray;
+
+        private Point mouseOffset;
 
         public Form1()
         {
@@ -218,9 +221,19 @@ namespace TaskManagement
             Close();
         }
 
-        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        private void TitalbarLabel_MouseMove(object sender, MouseEventArgs e)
         {
+            if (e.Button == MouseButtons.Left)
+            {
+                Point mousePos = Control.MousePosition;
+                mousePos.Offset(mouseOffset.X, mouseOffset.Y);
+                Location = mousePos;
+            }
+        }
 
+        private void TitalbarLabel_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseOffset = new Point(-e.X, -e.Y);
         }
     }
 }
