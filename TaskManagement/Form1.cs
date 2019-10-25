@@ -35,9 +35,8 @@ namespace TaskManagement
                 string path =
                     sb.Append(root) // 記得修改路徑
                     .Append(AppArray[i])
-                    .Append("\\")
-                    .Append(AppArray[i])
-                    .Append(".exe").ToString();
+                    .Append("\\")                 
+                    .Append("DemoApp.exe").ToString();
                 ProcessInfo process = new ProcessInfo
                 {
                     Name = AppArray[i],
@@ -66,10 +65,9 @@ namespace TaskManagement
             {
                 try
                 {
-                    Process p = Process.GetProcessById(info.ID);                    
-                    info.ID = 0;
-                    p.Kill();
                     MessageBox.Show(info.ID.ToString());
+                    Process p = Process.GetProcessById(info.ID);                                        
+                    p.Kill();                    
                     listBox1.Items.Remove(info);
                     info.ID = 0;
                     listBox2.ValueMember = null;
@@ -103,7 +101,7 @@ namespace TaskManagement
                 listBox2.Items.Remove(process);
                 listBox1.ValueMember = null;
                 listBox1.DisplayMember = "Name";
-                process.ID = 1;
+                process.ID = p.Id;
                 listBox1.Items.Add(process);               
             }
             else
@@ -122,7 +120,7 @@ namespace TaskManagement
                     listBox2.Items.Remove(process);
                     listBox1.ValueMember = null;
                     listBox1.DisplayMember = "Name";
-                    process.ID = 1;
+                    process.ID = p.Id;
                     listBox1.Items.Add(process);
                 }
             }
