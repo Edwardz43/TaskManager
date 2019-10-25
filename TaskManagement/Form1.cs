@@ -235,5 +235,11 @@ namespace TaskManagement
         {
             mouseOffset = new Point(-e.X, -e.Y);
         }
+
+        private void NarrowLabel_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
+            this.ShowInTaskbar = true;
+        }
     }
 }
