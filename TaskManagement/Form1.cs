@@ -3,13 +3,22 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
+using static TaskManagement.ShowWindowCommand;
 
 namespace TaskManagement
 {
     public partial class Form1 : Form
-    {        
+    {
+        [DllImport("USER32.DLL")]
+        public static extern bool SetForegroundWindow(IntPtr hWnd);
+
+        [DllImport("user32.dll")]
+        [return: MarshalAs(UnmanagedType.Bool)]
+        public static extern bool ShowWindow(IntPtr hWnd, ShowWindowCommands nCmdShow);
+
         public BindingList<ProcessInfo> objects;
 
         private Dictionary<int, bool> ProcessMap;
@@ -65,19 +74,19 @@ namespace TaskManagement
             {
                 try
                 {
-                    MessageBox.Show(info.ID.ToString());
+                    //MessageBox.Show(info.ID.ToString());
                     Process p = Process.GetProcessById(info.ID);                                        
-                    p.Kill();                    
-                    listBox1.Items.Remove(info);
-                    info.ID = 0;
-                    listBox2.ValueMember = null;
-                    listBox2.DisplayMember = "Name";
-                    listBox2.Items.Add(info);                   
+                    p.Kill();                                      
                 }
                 catch
                 {                    
                     MessageBox.Show("程序已終止");
-                }                               
+                }
+                listBox1.Items.Remove(info);
+                info.ID = 0;
+                listBox2.ValueMember = null;
+                listBox2.DisplayMember = "Name";
+                listBox2.Items.Add(info);
             }
 
         }
@@ -132,8 +141,16 @@ namespace TaskManagement
             {
                 if (process.ID != 0)
                 {
-                    Process p = Process.GetProcessById(process.ID);
-                    p.Kill();
+                    Process p;
+                    try
+                    {
+                        p = Process.GetProcessById(process.ID);
+                        p.Kill();
+                    }
+                    catch
+                    {
+                        //
+                    }                                       
                     process.ID = 0;
                     listBox1.Items.Remove(process);                  
                     listBox2.ValueMember = null;
@@ -148,5 +165,36 @@ namespace TaskManagement
 
         }
 
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+        private void ListBox1_DoubleClick(object sender, EventArgs e)
+        {
+            ListBox box = (ListBox)sender;
+            ProcessInfo processInfo = (ProcessInfo)box.SelectedItem;
+            Console.WriteLine(processInfo.ID + ", " + processInfo.Name);
+            //MessageBox.Show(processInfo.ID + ", " + processInfo.Name);
+
+            try
+            {
+                Process process = Process.GetProcessById(processInfo.ID);
+                if (process != null)
+                {
+                    //process.WaitForInputIdle();
+                    IntPtr s = process.MainWindowHandle;
+                    ShowWindow(s, ShowWindowCommands.Normal);
+                    SetForegroundWindow(s);
+                    
+                    Console.Write("Proccess found: " + process.ToString());
+                }
+                //listProcess();
+            }
+            catch (Exception exc)
+            {
+                Console.WriteLine("ERROR: Application is not running!\nException: " + exc.Message);                
+                return;
+            }
+        }
     }
 }

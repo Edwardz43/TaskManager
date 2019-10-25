@@ -1,4 +1,6 @@
-﻿namespace TaskManagement
+﻿using System;
+
+namespace TaskManagement
 {
     partial class Form1
     {
@@ -85,20 +87,22 @@
             this.listBox1.FormattingEnabled = true;
             this.listBox1.ItemHeight = 12;
             this.listBox1.Location = new System.Drawing.Point(31, 56);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
             this.listBox1.Size = new System.Drawing.Size(124, 208);
             this.listBox1.TabIndex = 8;
+            this.listBox1.DoubleClick += new EventHandler(ListBox1_DoubleClick);
             // 
             // listBox2
             // 
             this.listBox2.FormattingEnabled = true;
             this.listBox2.ItemHeight = 12;
             this.listBox2.Location = new System.Drawing.Point(211, 56);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.listBox2.Margin = new System.Windows.Forms.Padding(2);
             this.listBox2.Name = "listBox2";
             this.listBox2.Size = new System.Drawing.Size(144, 208);
             this.listBox2.TabIndex = 9;
+            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // Form1
             // 
@@ -116,11 +120,9 @@
             this.ResumeLayout(false);
 
         }
-
         #endregion
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.BindingSource form1BindingSource;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ListBox listBox1;
