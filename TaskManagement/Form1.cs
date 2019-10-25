@@ -35,6 +35,10 @@ namespace TaskManagement
             ProcessMap = new Dictionary<int, bool>();
             AppArray = ConfigurationManager.AppSettings["AppList"].Split(',');
             GetAppList();
+            //button1.FlatAppearance.BorderSize = 3;
+            //button2.FlatAppearance.BorderSize = 3;
+            //button3.FlatAppearance.BorderSize = 3;
+            //button4.FlatAppearance.BorderSize = 3;
         }
 
         /// <summary>
@@ -207,6 +211,16 @@ namespace TaskManagement
                 Console.WriteLine("ERROR: Application is not running!\nException: " + exc.Message);                
                 return;
             }
-        }        
+        }
+
+        private void CloseLabel_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
