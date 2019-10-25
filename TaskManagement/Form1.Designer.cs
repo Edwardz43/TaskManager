@@ -36,14 +36,17 @@ namespace TaskManagement
             this.button4 = new System.Windows.Forms.Button();
             this.listBox1 = new System.Windows.Forms.ListBox();
             this.listBox2 = new System.Windows.Forms.ListBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // button2
             // 
             this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(128)))), ((int)(((byte)(0)))));
-            this.button2.Location = new System.Drawing.Point(419, 241);
+            this.button2.Font = new System.Drawing.Font("微軟正黑體", 14.25F);
+            this.button2.Location = new System.Drawing.Point(481, 56);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
+            this.button2.Size = new System.Drawing.Size(94, 68);
             this.button2.TabIndex = 3;
             this.button2.Text = "終止程序";
             this.button2.UseVisualStyleBackColor = false;
@@ -52,9 +55,10 @@ namespace TaskManagement
             // button3
             // 
             this.button3.BackColor = System.Drawing.Color.Lime;
-            this.button3.Location = new System.Drawing.Point(419, 179);
+            this.button3.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.button3.Location = new System.Drawing.Point(360, 56);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
+            this.button3.Size = new System.Drawing.Size(94, 68);
             this.button3.TabIndex = 4;
             this.button3.Text = "開啟程序";
             this.button3.UseVisualStyleBackColor = false;
@@ -63,9 +67,10 @@ namespace TaskManagement
             // button1
             // 
             this.button1.BackColor = System.Drawing.Color.Aqua;
-            this.button1.Location = new System.Drawing.Point(419, 114);
+            this.button1.Font = new System.Drawing.Font("微軟正黑體", 14.25F);
+            this.button1.Location = new System.Drawing.Point(360, 181);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(94, 68);
             this.button1.TabIndex = 6;
             this.button1.Text = "全部開啟";
             this.button1.UseVisualStyleBackColor = false;
@@ -74,9 +79,10 @@ namespace TaskManagement
             // button4
             // 
             this.button4.BackColor = System.Drawing.Color.Tomato;
-            this.button4.Location = new System.Drawing.Point(419, 56);
+            this.button4.Font = new System.Drawing.Font("微軟正黑體", 14.25F);
+            this.button4.Location = new System.Drawing.Point(481, 181);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
+            this.button4.Size = new System.Drawing.Size(94, 68);
             this.button4.TabIndex = 7;
             this.button4.Text = "全部關閉";
             this.button4.UseVisualStyleBackColor = false;
@@ -84,31 +90,56 @@ namespace TaskManagement
             // 
             // listBox1
             // 
+            this.listBox1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 12;
+            this.listBox1.ItemHeight = 21;
             this.listBox1.Location = new System.Drawing.Point(31, 56);
             this.listBox1.Margin = new System.Windows.Forms.Padding(2);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(124, 208);
+            this.listBox1.Size = new System.Drawing.Size(124, 193);
             this.listBox1.TabIndex = 8;
-            this.listBox1.DoubleClick += new EventHandler(ListBox1_DoubleClick);
+            this.listBox1.DoubleClick += new System.EventHandler(this.SetConsoleForeground);
             // 
             // listBox2
             // 
+            this.listBox2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
             this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 12;
-            this.listBox2.Location = new System.Drawing.Point(211, 56);
+            this.listBox2.ItemHeight = 21;
+            this.listBox2.Location = new System.Drawing.Point(190, 56);
             this.listBox2.Margin = new System.Windows.Forms.Padding(2);
             this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(144, 208);
+            this.listBox2.Size = new System.Drawing.Size(144, 193);
             this.listBox2.TabIndex = 9;
-            this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Cambria", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(27, 17);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(88, 22);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "Running:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Cambria", 14.25F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))));
+            this.label2.Location = new System.Drawing.Point(186, 17);
+            this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(69, 22);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Closed:";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(535, 308);
+            this.ClientSize = new System.Drawing.Size(594, 273);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.listBox2);
             this.Controls.Add(this.listBox1);
             this.Controls.Add(this.button4);
@@ -118,6 +149,7 @@ namespace TaskManagement
             this.Name = "Form1";
             this.Text = "TaskManager";
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
         #endregion
@@ -127,6 +159,8 @@ namespace TaskManagement
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.ListBox listBox1;
         private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
