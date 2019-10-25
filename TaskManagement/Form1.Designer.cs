@@ -184,7 +184,6 @@ namespace TaskManagement
             this.TitalbarLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.TitalbarLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitalbarLabel_MouseDown);
             this.TitalbarLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TitalbarLabel_MouseMove);
-            this.TitalbarLabel.MouseUp += new System.Windows.Forms.MouseEventHandler(this.TitalbarLabel_MouseUp);
             // 
             // pictureBox1
             // 
