@@ -43,6 +43,7 @@ namespace TaskManagement
             this.TitalbarLabel = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.NarrowLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -140,7 +141,7 @@ namespace TaskManagement
             this.CloseLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CloseLabel.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.CloseLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.CloseLabel.Location = new System.Drawing.Point(882, 0);
+            this.CloseLabel.Location = new System.Drawing.Point(882, 4);
             this.CloseLabel.Name = "CloseLabel";
             this.CloseLabel.Size = new System.Drawing.Size(39, 32);
             this.CloseLabel.TabIndex = 12;
@@ -178,7 +179,7 @@ namespace TaskManagement
             this.TitalbarLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(203)))), ((int)(((byte)(158)))));
             this.TitalbarLabel.Location = new System.Drawing.Point(-5, 0);
             this.TitalbarLabel.Name = "TitalbarLabel";
-            this.TitalbarLabel.Size = new System.Drawing.Size(881, 32);
+            this.TitalbarLabel.Size = new System.Drawing.Size(836, 32);
             this.TitalbarLabel.TabIndex = 15;
             this.TitalbarLabel.Text = "label1";
             this.TitalbarLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -198,12 +199,27 @@ namespace TaskManagement
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(11)))), ((int)(((byte)(32)))), ((int)(((byte)(52)))));
+            this.panel1.Controls.Add(this.NarrowLabel);
             this.panel1.Controls.Add(this.TitalbarLabel);
             this.panel1.Controls.Add(this.CloseLabel);
             this.panel1.Location = new System.Drawing.Point(-4, -1);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(924, 36);
             this.panel1.TabIndex = 17;
+            // 
+            // NarrowLabel
+            // 
+            this.NarrowLabel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.NarrowLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.NarrowLabel.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.NarrowLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
+            this.NarrowLabel.Location = new System.Drawing.Point(837, 0);
+            this.NarrowLabel.Name = "NarrowLabel";
+            this.NarrowLabel.Size = new System.Drawing.Size(39, 32);
+            this.NarrowLabel.TabIndex = 16;
+            this.NarrowLabel.Text = "_";
+            this.NarrowLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.NarrowLabel.Click += new System.EventHandler(this.NarrowLabel_Click);
             // 
             // Form1
             // 
@@ -242,6 +258,7 @@ namespace TaskManagement
         private System.Windows.Forms.Label TitalbarLabel;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label NarrowLabel;
     }
 }
 
