@@ -31,12 +31,16 @@ namespace TaskManagement
 
         private Point mouseOffset;
 
+        private List<string> PathList;
+
+
         public Form1()
         {
             InitializeComponent();
             objects = new BindingList<ProcessInfo>();
             ProcessMap = new Dictionary<int, bool>();
             AppArray = ConfigurationManager.AppSettings["AppList"].Split(',');
+            PathList = new List<string>();
             GetAppList();
             //button1.FlatAppearance.BorderSize = 3;
             //button2.FlatAppearance.BorderSize = 3;
@@ -50,8 +54,10 @@ namespace TaskManagement
         private void GetAppList()
         {
             objects.Clear();
+            Process[] processesList = Process.GetProcessesByName("DemoApp");            
+
             for (int i = 0; i < AppArray.Length; i++)
-            {
+            {              
                 StringBuilder sb = new StringBuilder();
                 string root = ConfigurationManager.AppSettings["AppPath"].ToString();
                 string path =
@@ -59,6 +65,7 @@ namespace TaskManagement
                     .Append(AppArray[i])
                     .Append("\\")                 
                     .Append("DemoApp.exe").ToString();
+
                 ProcessInfo process = new ProcessInfo
                 {
                     Name = AppArray[i],
@@ -69,14 +76,33 @@ namespace TaskManagement
                 string data = string.Format("name:{0}, ID:{1}, Path:{2}", process.Name, process.ID, process.Path);
                 Console.WriteLine(data);
 
-                listBox2.ValueMember = null;
-                listBox2.DisplayMember = "Name";
-                listBox2.Items.Add(process);
-                /*listBox1.ValueMember = null;
-                listBox1.DisplayMember = "Name";
-                listBox1.DataSource = objects;*/
+                PathList.Add(path);
             }
-            
+
+            foreach (ProcessInfo pi in objects)
+            {
+                foreach (Process p in processesList)
+                {
+                    string sourcePath = p.MainModule.FileName;
+                    if (pi.Path.Equals(sourcePath))
+                    {
+                        listBox1.ValueMember = null;
+                        listBox1.DisplayMember = "Name";
+                        listBox1.Items.Add(pi);
+                        //TODO
+                    }
+                    else
+                    {
+                        if (!listBox2.Items.Contains(pi))
+                        {
+                            listBox2.ValueMember = null;
+                            listBox2.DisplayMember = "Name";
+                            listBox2.Items.Add(pi);
+                        }
+                    }
+                }                
+            }
+
             //listBox1.BeginUpdate();            
         }
 
