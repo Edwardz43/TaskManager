@@ -49,10 +49,11 @@ namespace TaskManagement
         private void GetAppList()
         {
             objects.Clear();
+            string executeName = ConfigurationManager.AppSettings["ExecuteName"].ToString();
 
-            Process[] processesList = Process.GetProcessesByName("DemoApp");
+            Process[] processesList = Process.GetProcessesByName(executeName);
 
-            Dictionary<string, bool> pathDic = new Dictionary<string, bool>(); 
+            Dictionary<string, bool> pathDic = new Dictionary<string, bool>();
 
             string[] gameList = ConfigurationManager.AppSettings["GameList"].Split(',');
 
@@ -60,7 +61,7 @@ namespace TaskManagement
             {
                 string root = ConfigurationManager.AppSettings["AppPath"].ToString(); // 記得修改路徑
 
-                List<string>deskList =  SearchDeskList(root, game);
+                List<string> deskList = SearchDeskList(root, game);
 
                 if (deskList != null)
                 {
@@ -70,7 +71,7 @@ namespace TaskManagement
                             .Append(game)
                             .Append('\\')
                             .Append(desk)
-                            .Append("\\DemoApp.exe").ToString();
+                            .Append(string.Format("\\{0}.exe", executeName)).ToString();
 
                         ProcessInfo process = new ProcessInfo
                         {
@@ -83,7 +84,7 @@ namespace TaskManagement
                         pathDic[path] = false;
                     }
                 }
-            }            
+            }
 
             foreach (ProcessInfo pi in objects)
             {
@@ -100,12 +101,12 @@ namespace TaskManagement
                         string sourcePath = p.MainModule.FileName;
                         if (sourcePath == pi.Path)
                         {
-                            pi.ID = p.Id;                            
+                            pi.ID = p.Id;
                             listBoxRunning.ValueMember = null;
                             listBoxRunning.DisplayMember = "Name";
                             listBoxRunning.Items.Add(pi);
                             pathDic[pi.Path] = true;
-                        }                      
+                        }
                     }
 
                     if (!pathDic[pi.Path])
@@ -116,7 +117,7 @@ namespace TaskManagement
                         pathDic[pi.Path] = true;
                     }
                 }
-            }            
+            }
         }
 
         /// <summary>
