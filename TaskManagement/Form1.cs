@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Configuration;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Windows.Forms;
@@ -24,19 +25,16 @@ namespace TaskManagement
         #endregion
 
         public BindingList<ProcessInfo> objects;
-
-        private Dictionary<int, bool> ProcessMap;
-
-        private string[] AppArray;
+             
+        private string[] GameArray;
 
         private Point mouseOffset;      
 
         public Form1()
         {
             InitializeComponent();
-            objects = new BindingList<ProcessInfo>();
-            ProcessMap = new Dictionary<int, bool>();
-            AppArray = ConfigurationManager.AppSettings["AppList"].Split(',');           
+            objects = new BindingList<ProcessInfo>();            
+            GameArray = ConfigurationManager.AppSettings["GameList"].Split(',');            
             GetAppList();
         }
 
@@ -51,25 +49,33 @@ namespace TaskManagement
 
             Dictionary<string, bool> pathDic = new Dictionary<string, bool>(); 
 
-            for (int i = 0; i < AppArray.Length; i++)
-            {              
-                StringBuilder sb = new StringBuilder();
+            string[] gameList = ConfigurationManager.AppSettings["GameList"].Split(',');
+
+            foreach (string game in GameArray)
+            {
                 string root = ConfigurationManager.AppSettings["AppPath"].ToString(); // 記得修改路徑
-                string path =
-                    sb.Append(root) 
-                    .Append(AppArray[i])                    
-                    .Append("\\DemoApp.exe").ToString();
 
-                ProcessInfo process = new ProcessInfo
-                {
-                    Name = new StringBuilder("Bacc\\").Append(AppArray[i]).ToString(),
-                    ID = 0,
-                    Path = path
-                };
+                List<string>deskList =  SearchDeskList(root, game);
 
-                objects.Add(process);
-                pathDic[path] = false;                
-            }
+                foreach (string desk in deskList)
+                {                                        
+                    string path = new StringBuilder(root)                        
+                        .Append(game)
+                        .Append('\\')
+                        .Append(desk)
+                        .Append("\\DemoApp.exe").ToString();
+
+                    ProcessInfo process = new ProcessInfo
+                    {
+                        Name = new StringBuilder(game).Append('\\').Append(desk).ToString(),
+                        ID = 0,
+                        Path = path
+                    };
+
+                    objects.Add(process);
+                    pathDic[path] = false;
+                }               
+            }            
 
             foreach (ProcessInfo pi in objects)
             {
@@ -84,7 +90,7 @@ namespace TaskManagement
                     foreach (Process p in processesList)
                     {
                         string sourcePath = p.MainModule.FileName;
-                        if (sourcePath.EndsWith(pi.Path))
+                        if (sourcePath == pi.Path)
                         {
                             pi.ID = p.Id;                            
                             listBoxRunning.ValueMember = null;
@@ -102,8 +108,27 @@ namespace TaskManagement
                         pathDic[pi.Path] = true;
                     }
                 }
+            }            
+        }
+
+        /// <summary>
+        /// 搜索各遊戲桌別列表
+        /// </summary>
+        /// <param name="root"></param>
+        /// <param name="target"></param>
+        /// <returns></returns>
+        private List<string> SearchDeskList(string root, string target)
+        {
+            List<string> result = new List<string>();
+
+            string path = new StringBuilder(root).Append('\\').Append(target).ToString();
+            string[] pathList =  Directory.GetDirectories(path);
+            foreach (string pathName in pathList)
+            {
+                var p = pathName.Split('\\');
+                result.Add(p[p.Length - 1]);
             }
-            //listBox1.BeginUpdate();            
+            return result;
         }
 
         /// <summary>
