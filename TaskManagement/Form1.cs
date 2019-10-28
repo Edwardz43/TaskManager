@@ -29,14 +29,14 @@ namespace TaskManagement
 
         private string[] AppArray;
 
-        private Point mouseOffset;
+        private Point mouseOffset;      
 
         public Form1()
         {
             InitializeComponent();
             objects = new BindingList<ProcessInfo>();
             ProcessMap = new Dictionary<int, bool>();
-            AppArray = ConfigurationManager.AppSettings["AppList"].Split(',');
+            AppArray = ConfigurationManager.AppSettings["AppList"].Split(',');           
             GetAppList();
         }
 
@@ -46,33 +46,63 @@ namespace TaskManagement
         private void GetAppList()
         {
             objects.Clear();
+
+            Process[] processesList = Process.GetProcessesByName("DemoApp");
+
+            Dictionary<string, bool> pathDic = new Dictionary<string, bool>(); 
+
             for (int i = 0; i < AppArray.Length; i++)
-            {
+            {              
                 StringBuilder sb = new StringBuilder();
-                string root = ConfigurationManager.AppSettings["AppPath"].ToString();
+                string root = ConfigurationManager.AppSettings["AppPath"].ToString(); // 記得修改路徑
                 string path =
-                    sb.Append(root) // 記得修改路徑
-                    .Append(AppArray[i])
-                    .Append("\\")                 
-                    .Append("DemoApp.exe").ToString();
+                    sb.Append(root) 
+                    .Append(AppArray[i])                    
+                    .Append("\\DemoApp.exe").ToString();
+
                 ProcessInfo process = new ProcessInfo
                 {
-                    Name = AppArray[i],
+                    Name = new StringBuilder("Bacc\\").Append(AppArray[i]).ToString(),
                     ID = 0,
                     Path = path
                 };
-                objects.Add(process);
-                string data = string.Format("name:{0}, ID:{1}, Path:{2}", process.Name, process.ID, process.Path);
-                Console.WriteLine(data);
 
-                listBox2.ValueMember = null;
-                listBox2.DisplayMember = "Name";
-                listBox2.Items.Add(process);
-                /*listBox1.ValueMember = null;
-                listBox1.DisplayMember = "Name";
-                listBox1.DataSource = objects;*/
+                objects.Add(process);
+                pathDic[path] = false;                
             }
-            
+
+            foreach (ProcessInfo pi in objects)
+            {
+                if (processesList.Length == 0)
+                {
+                    listBoxClose.ValueMember = null;
+                    listBoxClose.DisplayMember = "Name";
+                    listBoxClose.Items.Add(pi);
+                }
+                else
+                {
+                    foreach (Process p in processesList)
+                    {
+                        string sourcePath = p.MainModule.FileName;
+                        if (sourcePath.EndsWith(pi.Path))
+                        {
+                            pi.ID = p.Id;                            
+                            listBoxRunning.ValueMember = null;
+                            listBoxRunning.DisplayMember = "Name";
+                            listBoxRunning.Items.Add(pi);
+                            pathDic[pi.Path] = true;
+                        }                      
+                    }
+
+                    if (!pathDic[pi.Path])
+                    {
+                        listBoxClose.ValueMember = null;
+                        listBoxClose.DisplayMember = "Name";
+                        listBoxClose.Items.Add(pi);
+                        pathDic[pi.Path] = true;
+                    }
+                }
+            }
             //listBox1.BeginUpdate();            
         }
 
@@ -83,7 +113,7 @@ namespace TaskManagement
         /// <param name="e"></param>
         private void TerminateProcess(object sender, EventArgs e)
         {
-            ProcessInfo info = (ProcessInfo)listBox1.SelectedItem;
+            ProcessInfo info = (ProcessInfo)listBoxRunning.SelectedItem;
             if (info != null)
             {
                 try
@@ -96,11 +126,11 @@ namespace TaskManagement
                 {                    
                     MessageBox.Show("程序已終止");
                 }
-                listBox1.Items.Remove(info);
+                listBoxRunning.Items.Remove(info);
                 info.ID = 0;
-                listBox2.ValueMember = null;
-                listBox2.DisplayMember = "Name";
-                listBox2.Items.Add(info);
+                listBoxClose.ValueMember = null;
+                listBoxClose.DisplayMember = "Name";
+                listBoxClose.Items.Add(info);
             }
 
         }
@@ -112,16 +142,16 @@ namespace TaskManagement
         /// <param name="e"></param>
         private void InvokeBtn(object sender, EventArgs e)
         {            
-            ProcessInfo process = ((ProcessInfo)listBox2.SelectedItem);
+            ProcessInfo process = ((ProcessInfo)listBoxClose.SelectedItem);
             if (process != null)
             {
                 Process p = Process.Start(process.Path);                
                 process.ID = p.Id;               
-                listBox2.Items.Remove(process);
-                listBox1.ValueMember = null;
-                listBox1.DisplayMember = "Name";
+                listBoxClose.Items.Remove(process);
+                listBoxRunning.ValueMember = null;
+                listBoxRunning.DisplayMember = "Name";
                 process.ID = p.Id;
-                listBox1.Items.Add(process);               
+                listBoxRunning.Items.Add(process);               
             }
             else
             {
@@ -141,11 +171,11 @@ namespace TaskManagement
                 if (process.ID == 0)
                 {
                     Process p = Process.Start(process.Path);                 
-                    listBox2.Items.Remove(process);
-                    listBox1.ValueMember = null;
-                    listBox1.DisplayMember = "Name";
+                    listBoxClose.Items.Remove(process);
+                    listBoxRunning.ValueMember = null;
+                    listBoxRunning.DisplayMember = "Name";
                     process.ID = p.Id;
-                    listBox1.Items.Add(process);
+                    listBoxRunning.Items.Add(process);
                 }
             }
         }
@@ -172,10 +202,10 @@ namespace TaskManagement
                         //
                     }                                       
                     process.ID = 0;
-                    listBox1.Items.Remove(process);                  
-                    listBox2.ValueMember = null;
-                    listBox2.DisplayMember = "Name";
-                    listBox2.Items.Add(process);
+                    listBoxRunning.Items.Remove(process);                  
+                    listBoxClose.ValueMember = null;
+                    listBoxClose.DisplayMember = "Name";
+                    listBoxClose.Items.Add(process);
                 }
             }
         }       
@@ -212,11 +242,21 @@ namespace TaskManagement
             }
         }
 
+        /// <summary>
+        /// 關閉程式
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CloseLabel_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// 拖移視窗 (mouse move)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TitalbarLabel_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
@@ -227,11 +267,21 @@ namespace TaskManagement
             }
         }
 
+        /// <summary>
+        /// 拖移視窗 (mouse down)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void TitalbarLabel_MouseDown(object sender, MouseEventArgs e)
         {
             mouseOffset = new Point(-e.X, -e.Y);
         }
 
+        /// <summary>
+        /// 縮小視窗
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void NarrowLabel_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
