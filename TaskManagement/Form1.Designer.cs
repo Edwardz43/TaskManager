@@ -35,8 +35,8 @@ namespace TaskManagement
             this.button3 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.button4 = new System.Windows.Forms.Button();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.listBoxRunning = new System.Windows.Forms.ListBox();
+            this.listBoxClose = new System.Windows.Forms.ListBox();
             this.CloseLabel = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
@@ -108,33 +108,33 @@ namespace TaskManagement
             // 
             // listBox1
             // 
-            this.listBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
-            this.listBox1.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBox1.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listBox1.ForeColor = System.Drawing.Color.White;
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 21;
-            this.listBox1.Location = new System.Drawing.Point(5, 31);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(268, 357);
-            this.listBox1.TabIndex = 8;
-            this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            this.listBox1.DoubleClick += new System.EventHandler(this.SetConsoleForeground);
+            this.listBoxRunning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
+            this.listBoxRunning.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBoxRunning.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listBoxRunning.ForeColor = System.Drawing.Color.White;
+            this.listBoxRunning.FormattingEnabled = true;
+            this.listBoxRunning.ItemHeight = 21;
+            this.listBoxRunning.Location = new System.Drawing.Point(5, 31);
+            this.listBoxRunning.Margin = new System.Windows.Forms.Padding(2);
+            this.listBoxRunning.Name = "listBox1";
+            this.listBoxRunning.Size = new System.Drawing.Size(268, 357);
+            this.listBoxRunning.TabIndex = 8;
+            //this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.listBoxRunning.DoubleClick += new System.EventHandler(this.SetConsoleForeground);
             // 
             // listBox2
             // 
-            this.listBox2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
-            this.listBox2.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.listBox2.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.listBox2.ForeColor = System.Drawing.Color.White;
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 21;
-            this.listBox2.Location = new System.Drawing.Point(5, 31);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(268, 357);
-            this.listBox2.TabIndex = 9;
+            this.listBoxClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
+            this.listBoxClose.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.listBoxClose.Font = new System.Drawing.Font("微軟正黑體", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.listBoxClose.ForeColor = System.Drawing.Color.White;
+            this.listBoxClose.FormattingEnabled = true;
+            this.listBoxClose.ItemHeight = 21;
+            this.listBoxClose.Location = new System.Drawing.Point(5, 31);
+            this.listBoxClose.Margin = new System.Windows.Forms.Padding(2);
+            this.listBoxClose.Name = "listBox2";
+            this.listBoxClose.Size = new System.Drawing.Size(268, 357);
+            this.listBoxClose.TabIndex = 9;
             //this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // CloseLabel
@@ -153,7 +153,7 @@ namespace TaskManagement
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.listBox1);
+            this.groupBox1.Controls.Add(this.listBoxRunning);
             this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(203)))), ((int)(((byte)(158)))));
             this.groupBox1.Location = new System.Drawing.Point(12, 54);
@@ -165,7 +165,7 @@ namespace TaskManagement
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.listBox2);
+            this.groupBox2.Controls.Add(this.listBoxClose);
             this.groupBox2.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
             this.groupBox2.Location = new System.Drawing.Point(296, 54);
@@ -252,8 +252,8 @@ namespace TaskManagement
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox listBoxRunning;
+        private System.Windows.Forms.ListBox listBoxClose;
         private System.Windows.Forms.Label CloseLabel;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
