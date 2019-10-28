@@ -274,7 +274,8 @@ namespace TaskManagement
         /// <param name="e"></param>
         private void CloseLabel_Click(object sender, EventArgs e)
         {
-            Close();
+            
+            this.Close();
         }
 
         /// <summary>
@@ -311,6 +312,21 @@ namespace TaskManagement
         {
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = true;
+        }
+
+        /// <summary>
+        /// 確認是否關閉視窗
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("確認結束程式?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
