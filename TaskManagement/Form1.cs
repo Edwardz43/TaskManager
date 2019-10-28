@@ -62,24 +62,27 @@ namespace TaskManagement
 
                 List<string>deskList =  SearchDeskList(root, game);
 
-                foreach (string desk in deskList)
-                {                                        
-                    string path = new StringBuilder(root)                        
-                        .Append(game)
-                        .Append('\\')
-                        .Append(desk)
-                        .Append("\\DemoApp.exe").ToString();
-
-                    ProcessInfo process = new ProcessInfo
+                if (deskList != null)
+                {
+                    foreach (string desk in deskList)
                     {
-                        Name = new StringBuilder(game).Append('\\').Append(desk).ToString(),
-                        ID = 0,
-                        Path = path
-                    };
+                        string path = new StringBuilder(root)
+                            .Append(game)
+                            .Append('\\')
+                            .Append(desk)
+                            .Append("\\DemoApp.exe").ToString();
 
-                    objects.Add(process);
-                    pathDic[path] = false;
-                }               
+                        ProcessInfo process = new ProcessInfo
+                        {
+                            Name = new StringBuilder(game).Append('\\').Append(desk).ToString(),
+                            ID = 0,
+                            Path = path
+                        };
+
+                        objects.Add(process);
+                        pathDic[path] = false;
+                    }
+                }
             }            
 
             foreach (ProcessInfo pi in objects)
@@ -127,13 +130,23 @@ namespace TaskManagement
             List<string> result = new List<string>();
 
             string path = new StringBuilder(root).Append('\\').Append(target).ToString();
-            string[] pathList =  Directory.GetDirectories(path);
-            foreach (string pathName in pathList)
+
+            string[] pathList;
+            try
             {
-                var p = pathName.Split('\\');
-                result.Add(p[p.Length - 1]);
+                pathList = Directory.GetDirectories(path);
+                foreach (string pathName in pathList)
+                {
+                    var p = pathName.Split('\\');
+                    result.Add(p[p.Length - 1]);
+                }
+                return result;
             }
-            return result;
+            catch
+            {
+                //MessageBox.Show("設定檔錯誤! 請確認遊戲列表是否正確");
+                return null;
+            }
         }
 
         /// <summary>
