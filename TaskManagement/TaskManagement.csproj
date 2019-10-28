@@ -69,10 +69,6 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="DemoApp\DemoApp1\DemoApp.exe.config" />
-    <None Include="DemoApp\DemoApp2\DemoApp.exe.config" />
-    <None Include="DemoApp\DemoApp3\DemoApp.exe.config" />
-    <None Include="DemoApp\DemoApp4\DemoApp.exe.config" />
     <None Include="GameServer\Bacc\A\DemoApp.exe.config" />
     <None Include="GameServer\Bacc\B\DemoApp.exe.config" />
     <None Include="GameServer\Bacc\C\DemoApp.exe.config" />
@@ -120,14 +116,6 @@
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DemoApp\DemoApp1\DemoApp.exe" />
-    <Content Include="DemoApp\DemoApp1\DemoApp.pdb" />
-    <Content Include="DemoApp\DemoApp2\DemoApp.exe" />
-    <Content Include="DemoApp\DemoApp2\DemoApp.pdb" />
-    <Content Include="DemoApp\DemoApp3\DemoApp.exe" />
-    <Content Include="DemoApp\DemoApp3\DemoApp.pdb" />
-    <Content Include="DemoApp\DemoApp4\DemoApp.exe" />
-    <Content Include="DemoApp\DemoApp4\DemoApp.pdb" />
     <Content Include="GameServer\Bacc\A\DemoApp.exe" />
     <Content Include="GameServer\Bacc\A\DemoApp.pdb" />
     <Content Include="GameServer\Bacc\B\DemoApp.exe" />
