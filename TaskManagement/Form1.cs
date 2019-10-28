@@ -36,6 +36,11 @@ namespace TaskManagement
             objects = new BindingList<ProcessInfo>();            
             GameArray = ConfigurationManager.AppSettings["GameList"].Split(',');            
             GetAppList();
+            var toggle = bool.Parse(ConfigurationManager.AppSettings["ButtonSwitch"]);
+            this.buttonInvokeAll.Enabled = toggle;
+            this.buttonTerminate.Enabled = toggle;
+            this.buttonInvoke.Enabled = toggle;
+            this.buttonTerminateAll.Enabled = toggle;
         }
 
         /// <summary>

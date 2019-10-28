@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.buttonTerminate = new System.Windows.Forms.Button();
+            this.buttonInvoke = new System.Windows.Forms.Button();
+            this.buttonInvokeAll = new System.Windows.Forms.Button();
+            this.buttonTerminateAll = new System.Windows.Forms.Button();
             this.listBoxRunning = new System.Windows.Forms.ListBox();
             this.listBoxClose = new System.Windows.Forms.ListBox();
             this.CloseLabel = new System.Windows.Forms.Label();
@@ -48,61 +48,61 @@
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button2
+            // buttonTerminate
             // 
-            this.button2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
-            this.button2.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button2.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
-            this.button2.Location = new System.Drawing.Point(580, 140);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(156, 68);
-            this.button2.TabIndex = 3;
-            this.button2.Text = "終止程序";
-            this.button2.UseVisualStyleBackColor = false;
-            this.button2.Click += new System.EventHandler(this.TerminateProcess);
+            this.buttonTerminate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
+            this.buttonTerminate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTerminate.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.buttonTerminate.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
+            this.buttonTerminate.Location = new System.Drawing.Point(580, 140);
+            this.buttonTerminate.Name = "button2";
+            this.buttonTerminate.Size = new System.Drawing.Size(156, 68);
+            this.buttonTerminate.TabIndex = 3;
+            this.buttonTerminate.Text = "終止程序";
+            this.buttonTerminate.UseVisualStyleBackColor = false;
+            this.buttonTerminate.Click += new System.EventHandler(this.TerminateProcess);
             // 
-            // button3
+            // buttonInvoke
             // 
-            this.button3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
-            this.button3.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button3.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(203)))), ((int)(((byte)(158)))));
-            this.button3.Location = new System.Drawing.Point(580, 66);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(156, 68);
-            this.button3.TabIndex = 4;
-            this.button3.Text = "開啟程序";
-            this.button3.UseVisualStyleBackColor = false;
-            this.button3.Click += new System.EventHandler(this.InvokeBtn);
+            this.buttonInvoke.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
+            this.buttonInvoke.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInvoke.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.buttonInvoke.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(203)))), ((int)(((byte)(158)))));
+            this.buttonInvoke.Location = new System.Drawing.Point(580, 66);
+            this.buttonInvoke.Name = "button3";
+            this.buttonInvoke.Size = new System.Drawing.Size(156, 68);
+            this.buttonInvoke.TabIndex = 4;
+            this.buttonInvoke.Text = "開啟程序";
+            this.buttonInvoke.UseVisualStyleBackColor = false;
+            this.buttonInvoke.Click += new System.EventHandler(this.InvokeBtn);
             // 
-            // button1
+            // buttonInvokeAll
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
-            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button1.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(203)))), ((int)(((byte)(158)))));
-            this.button1.Location = new System.Drawing.Point(742, 66);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(156, 68);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "全部開啟";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.InvokeAll);
+            this.buttonInvokeAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
+            this.buttonInvokeAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonInvokeAll.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.buttonInvokeAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(203)))), ((int)(((byte)(158)))));
+            this.buttonInvokeAll.Location = new System.Drawing.Point(742, 66);
+            this.buttonInvokeAll.Name = "button1";
+            this.buttonInvokeAll.Size = new System.Drawing.Size(156, 68);
+            this.buttonInvokeAll.TabIndex = 6;
+            this.buttonInvokeAll.Text = "全部開啟";
+            this.buttonInvokeAll.UseVisualStyleBackColor = false;
+            this.buttonInvokeAll.Click += new System.EventHandler(this.InvokeAll);
             // 
-            // button4
+            // buttonTerminateAll
             // 
-            this.button4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
-            this.button4.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.button4.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
-            this.button4.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
-            this.button4.Location = new System.Drawing.Point(742, 140);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(156, 68);
-            this.button4.TabIndex = 7;
-            this.button4.Text = "全部關閉";
-            this.button4.UseVisualStyleBackColor = false;
-            this.button4.Click += new System.EventHandler(this.TerminateAll);
+            this.buttonTerminateAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
+            this.buttonTerminateAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.buttonTerminateAll.Font = new System.Drawing.Font("微軟正黑體", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(136)));
+            this.buttonTerminateAll.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(87)))), ((int)(((byte)(51)))));
+            this.buttonTerminateAll.Location = new System.Drawing.Point(742, 140);
+            this.buttonTerminateAll.Name = "button4";
+            this.buttonTerminateAll.Size = new System.Drawing.Size(156, 68);
+            this.buttonTerminateAll.TabIndex = 7;
+            this.buttonTerminateAll.Text = "全部關閉";
+            this.buttonTerminateAll.UseVisualStyleBackColor = false;
+            this.buttonTerminateAll.Click += new System.EventHandler(this.TerminateAll);
             // 
             // listBoxRunning
             // 
@@ -231,10 +231,10 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button4);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.button3);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.buttonTerminateAll);
+            this.Controls.Add(this.buttonInvokeAll);
+            this.Controls.Add(this.buttonInvoke);
+            this.Controls.Add(this.buttonTerminate);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "Form1";
             this.Text = "TaskManager";
@@ -246,10 +246,10 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
         }
         #endregion
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button buttonTerminate;
+        private System.Windows.Forms.Button buttonInvoke;
+        private System.Windows.Forms.Button buttonInvokeAll;
+        private System.Windows.Forms.Button buttonTerminateAll;
         private System.Windows.Forms.ListBox listBoxRunning;
         private System.Windows.Forms.ListBox listBoxClose;
         private System.Windows.Forms.Label CloseLabel;
