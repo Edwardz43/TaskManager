@@ -1,10 +1,3 @@
 .vs/
-TaskManagement/bin/Debug/TaskManagement.exe
-TaskManagement/bin/Debug/TaskManagement.exe.config
-TaskManagement/bin/Debug/TaskManagement.pdb
-TaskManagement/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
-TaskManagement/obj/Debug/TaskManagement.csproj.CoreCompileInputs.cache
-TaskManagement/obj/Debug/TaskManagement.csprojAssemblyReference.cache
-TaskManagement/obj/Debug/TaskManagement.exe
-TaskManagement/obj/Debug/TaskManagement.pdb
-TaskManagement/obj/Debug/TaskManagement.csproj.GenerateResource.cache
+TaskManagement/bin/*
+TaskManagement/obj/*

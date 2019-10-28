@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace TaskManagement
+﻿namespace TaskManagement
 {
     partial class Form1
     {
@@ -118,6 +116,7 @@ namespace TaskManagement
             this.listBoxRunning.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxRunning.Name = "listBoxRunning";
             this.listBoxRunning.Size = new System.Drawing.Size(268, 357);
+            this.listBoxRunning.Sorted = true;
             this.listBoxRunning.TabIndex = 8;
             this.listBoxRunning.DoubleClick += new System.EventHandler(this.SetConsoleForeground);
             // 
@@ -133,6 +132,7 @@ namespace TaskManagement
             this.listBoxClose.Margin = new System.Windows.Forms.Padding(2);
             this.listBoxClose.Name = "listBoxClose";
             this.listBoxClose.Size = new System.Drawing.Size(268, 357);
+            this.listBoxClose.Sorted = true;
             this.listBoxClose.TabIndex = 9;
             // 
             // CloseLabel
@@ -181,7 +181,7 @@ namespace TaskManagement
             this.TitalbarLabel.Name = "TitalbarLabel";
             this.TitalbarLabel.Size = new System.Drawing.Size(836, 32);
             this.TitalbarLabel.TabIndex = 15;
-            this.TitalbarLabel.Text = "Tital";
+            this.TitalbarLabel.Text = "程序管理工具";
             this.TitalbarLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.TitalbarLabel.MouseDown += new System.Windows.Forms.MouseEventHandler(this.TitalbarLabel_MouseDown);
             this.TitalbarLabel.MouseMove += new System.Windows.Forms.MouseEventHandler(this.TitalbarLabel_MouseMove);
@@ -189,10 +189,10 @@ namespace TaskManagement
             // pictureBox1
             // 
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(742, 323);
+            this.pictureBox1.Location = new System.Drawing.Point(692, 286);
             this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(156, 128);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.Size = new System.Drawing.Size(206, 165);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBox1.TabIndex = 16;
             this.pictureBox1.TabStop = false;
             // 
