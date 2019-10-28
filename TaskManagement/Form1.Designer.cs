@@ -175,11 +175,11 @@
             // 
             // TitalbarLabel
             // 
-            this.TitalbarLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.TitalbarLabel.Font = new System.Drawing.Font("微軟正黑體", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.TitalbarLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(97)))), ((int)(((byte)(203)))), ((int)(((byte)(158)))));
-            this.TitalbarLabel.Location = new System.Drawing.Point(-5, 0);
+            this.TitalbarLabel.Location = new System.Drawing.Point(0, 4);
             this.TitalbarLabel.Name = "TitalbarLabel";
-            this.TitalbarLabel.Size = new System.Drawing.Size(836, 32);
+            this.TitalbarLabel.Size = new System.Drawing.Size(831, 32);
             this.TitalbarLabel.TabIndex = 15;
             this.TitalbarLabel.Text = "程序管理工具";
             this.TitalbarLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -213,7 +213,7 @@
             this.NarrowLabel.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.NarrowLabel.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.NarrowLabel.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(222)))), ((int)(((byte)(52)))), ((int)(((byte)(52)))));
-            this.NarrowLabel.Location = new System.Drawing.Point(837, 0);
+            this.NarrowLabel.Location = new System.Drawing.Point(837, 4);
             this.NarrowLabel.Name = "NarrowLabel";
             this.NarrowLabel.Size = new System.Drawing.Size(39, 32);
             this.NarrowLabel.TabIndex = 16;
@@ -243,7 +243,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.ResumeLayout(false);
-
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
         }
         #endregion
         private System.Windows.Forms.Button buttonTerminate;

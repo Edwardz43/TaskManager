@@ -36,16 +36,11 @@ namespace TaskManagement
             objects = new BindingList<ProcessInfo>();            
             GameArray = ConfigurationManager.AppSettings["GameList"].Split(',');            
             GetAppList();
-
             var toggle = bool.Parse(ConfigurationManager.AppSettings["ButtonSwitch"]);
             this.buttonInvokeAll.Enabled = toggle;
             this.buttonTerminate.Enabled = toggle;
             this.buttonInvoke.Enabled = toggle;
             this.buttonTerminateAll.Enabled = toggle;
-            //button1.FlatAppearance.BorderSize = 3;
-            //button2.FlatAppearance.BorderSize = 3;
-            //button3.FlatAppearance.BorderSize = 3;
-            //button4.FlatAppearance.BorderSize = 3;
         }
 
         /// <summary>
@@ -284,7 +279,8 @@ namespace TaskManagement
         /// <param name="e"></param>
         private void CloseLabel_Click(object sender, EventArgs e)
         {
-            Close();
+            
+            this.Close();
         }
 
         /// <summary>
@@ -321,6 +317,21 @@ namespace TaskManagement
         {
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = true;
+        }
+
+        /// <summary>
+        /// 確認是否關閉視窗
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            DialogResult result = MessageBox.Show("確認結束程式?", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+            if (result == DialogResult.No)
+            {
+                e.Cancel = true;
+            }
         }
     }
 }
