@@ -106,7 +106,7 @@ namespace TaskManagement
             this.button4.UseVisualStyleBackColor = false;
             this.button4.Click += new System.EventHandler(this.TerminateAll);
             // 
-            // listBox1
+            // listBoxRunning
             // 
             this.listBoxRunning.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
             this.listBoxRunning.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -116,13 +116,12 @@ namespace TaskManagement
             this.listBoxRunning.ItemHeight = 21;
             this.listBoxRunning.Location = new System.Drawing.Point(5, 31);
             this.listBoxRunning.Margin = new System.Windows.Forms.Padding(2);
-            this.listBoxRunning.Name = "listBox1";
+            this.listBoxRunning.Name = "listBoxRunning";
             this.listBoxRunning.Size = new System.Drawing.Size(268, 357);
             this.listBoxRunning.TabIndex = 8;
-            //this.listBox1.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             this.listBoxRunning.DoubleClick += new System.EventHandler(this.SetConsoleForeground);
             // 
-            // listBox2
+            // listBoxClose
             // 
             this.listBoxClose.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(38)))), ((int)(((byte)(65)))), ((int)(((byte)(99)))));
             this.listBoxClose.BorderStyle = System.Windows.Forms.BorderStyle.None;
@@ -132,10 +131,9 @@ namespace TaskManagement
             this.listBoxClose.ItemHeight = 21;
             this.listBoxClose.Location = new System.Drawing.Point(5, 31);
             this.listBoxClose.Margin = new System.Windows.Forms.Padding(2);
-            this.listBoxClose.Name = "listBox2";
+            this.listBoxClose.Name = "listBoxClose";
             this.listBoxClose.Size = new System.Drawing.Size(268, 357);
             this.listBoxClose.TabIndex = 9;
-            //this.listBox2.SelectedIndexChanged += new System.EventHandler(this.listBox2_SelectedIndexChanged);
             // 
             // CloseLabel
             // 
