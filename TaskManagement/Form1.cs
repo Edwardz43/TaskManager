@@ -31,7 +31,7 @@ namespace TaskManagement
 
         private Point mouseOffset;
 
-        private List<string> PathList;
+        private Dictionary<string, bool> PathDic;
 
 
         public Form1()
@@ -40,7 +40,7 @@ namespace TaskManagement
             objects = new BindingList<ProcessInfo>();
             ProcessMap = new Dictionary<int, bool>();
             AppArray = ConfigurationManager.AppSettings["AppList"].Split(',');
-            PathList = new List<string>();
+            PathDic = new Dictionary<string, bool>();
             GetAppList();
             //button1.FlatAppearance.BorderSize = 3;
             //button2.FlatAppearance.BorderSize = 3;
@@ -62,47 +62,53 @@ namespace TaskManagement
                 string root = ConfigurationManager.AppSettings["AppPath"].ToString();
                 string path =
                     sb.Append(root) // 記得修改路徑
-                    .Append(AppArray[i])
-                    .Append("\\")                 
-                    .Append("DemoApp.exe").ToString();
+                    .Append(AppArray[i])                    
+                    .Append("\\DemoApp.exe").ToString();
 
                 ProcessInfo process = new ProcessInfo
                 {
-                    Name = AppArray[i],
+                    Name = new StringBuilder("Bacc\\").Append(AppArray[i]).ToString(),
                     ID = 0,
                     Path = path
                 };
                 objects.Add(process);
-                string data = string.Format("name:{0}, ID:{1}, Path:{2}", process.Name, process.ID, process.Path);
-                Console.WriteLine(data);
-
-                PathList.Add(path);
+                PathDic[path] = false;
+                //string data = string.Format("name:{0}, ID:{1}, Path:{2}", process.Name, process.ID, process.Path);
+                //Console.WriteLine(data);           
             }
 
             foreach (ProcessInfo pi in objects)
             {
-                foreach (Process p in processesList)
+                if (processesList.Length == 0)
                 {
-                    string sourcePath = p.MainModule.FileName;
-                    if (pi.Path.Equals(sourcePath))
+                    listBox2.ValueMember = null;
+                    listBox2.DisplayMember = "Name";
+                    listBox2.Items.Add(pi);
+                }
+                else
+                {
+                    foreach (Process p in processesList)
                     {
-                        listBox1.ValueMember = null;
-                        listBox1.DisplayMember = "Name";
-                        listBox1.Items.Add(pi);
-                        //TODO
-                    }
-                    else
-                    {
-                        if (!listBox2.Items.Contains(pi))
+                        string sourcePath = p.MainModule.FileName;
+                        if (sourcePath.EndsWith(pi.Path))
                         {
-                            listBox2.ValueMember = null;
-                            listBox2.DisplayMember = "Name";
-                            listBox2.Items.Add(pi);
-                        }
+                            pi.ID = p.Id;                            
+                            listBox1.ValueMember = null;
+                            listBox1.DisplayMember = "Name";
+                            listBox1.Items.Add(pi);
+                            PathDic[pi.Path] = true;
+                        }                      
                     }
-                }                
-            }
 
+                    if (!PathDic[pi.Path])
+                    {
+                        listBox2.ValueMember = null;
+                        listBox2.DisplayMember = "Name";
+                        listBox2.Items.Add(pi);
+                        PathDic[pi.Path] = true;
+                    }
+                }
+            }
             //listBox1.BeginUpdate();            
         }
 
@@ -266,6 +272,12 @@ namespace TaskManagement
         {
             this.WindowState = FormWindowState.Minimized;
             this.ShowInTaskbar = true;
+        }
+
+        private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //ProcessInfo pi = (ProcessInfo)listBox1.SelectedItem;
+            //Console.WriteLine(pi.Path);
         }
     }
 }
